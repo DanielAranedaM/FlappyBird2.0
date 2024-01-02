@@ -64,6 +64,16 @@ export class HomePage implements OnInit{
     if (this.gameStarted) this.bird_position += gravity;
   }
 
+  //**Funcion para saltar*/
+  //**se valida q el juego este iniciado primero*/
+  jump(){
+    if (this.gameStarted){
+      //**con esta condicion evitamos que el pajaro salga del tope del contenedor*/
+      if (this.bird_position < this.bird_height) this.bird_position = 0;
+      else this.bird_position -=60;
+    }
+  }
+
   //**Funcion para activar y desactivar musica */
   playMusic(){
     this.musicActive = !this.musicActive;
