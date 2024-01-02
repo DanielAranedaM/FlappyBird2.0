@@ -41,13 +41,16 @@ export class HomePage implements OnInit{
   //**esta variable representa la distancia entre el obstaculo superior e inferior*/
   obstacle_gap: number = 200;
 
+  //**con variables de intervalos se estara ejecutando cosntantemente*/
   bird_interval!:ReturnType<typeof setTimeout>;
+  obstacle_interval!:ReturnType<typeof setTimeout>;
 
   constructor(private platform: Platform) {}
 
   ngOnInit(): void {
     this.setContainerSize();
     this.bird_interval = setInterval(this.addGravity.bind(this),24);
+    this.obstacle_interval = setInterval(this.moveObstacle.bind(this),24);
   }
 
   //**Definir el tamaño del contenedor*/
@@ -113,7 +116,9 @@ export class HomePage implements OnInit{
 
   //**Funcion para resetear la posicion de los obstaculos */
   resetObstaclePosition(){
-
+    this.obstacle_position = this.container_width;
+    //**Con esto haremos que el obstaculo tenga una altura aleatoria*/
+    this.obstacle_height = Math.floor(Math.random() * (this.container_height - this.obstacle_gap))
   }
 
 }
