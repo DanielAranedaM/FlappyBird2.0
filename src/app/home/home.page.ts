@@ -34,6 +34,13 @@ export class HomePage implements OnInit{
   bird_width: number = 43;
   bird_position: number = 300;
 
+  //**variable para la posicion del obstaculo*/
+  obstacle_height: number = 0;
+  obstacle_width: number = 52;
+  obstacle_position: number = this.container_width;
+  //**esta variable representa la distancia entre el obstaculo superior e inferior*/
+  obstacle_gap: number = 200;
+
   bird_interval!:ReturnType<typeof setTimeout>;
 
   constructor(private platform: Platform) {}

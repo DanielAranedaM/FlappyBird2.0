@@ -54,12 +54,32 @@
       <!--Juego iniciado-->
       <section *ngIf="gameStarted">
 
-        <!--parametros obtenidos del home.page-->
+        <!--parametros obtenidos del home.page para obstaculo-->
+        <!--Obstaculo superior-->
+        <app-obstacle
+        [height]="obstacle_height"
+        [width]="obstacle_width"
+        [left]="obstacle_position"
+        [top]="0"
+        [rotation]="180"
+        ></app-obstacle>
+
+        <!--parametros obtenidos del home.page para el ave-->
         <app-bird 
         [height]='bird_height'
         [width]="bird_width"
         [top]="bird_position">
         </app-bird>
+
+        <!--parametros obtenidos del home.page para obstaculo-->
+        <!--Obstaculo inferior-->
+        <app-obstacle
+        [height]="container_height - obstacle_gap - obstacle_height"
+        [width]="obstacle_width"
+        [left]="obstacle_position"
+        [top]="container_height-(obstacle_height+(container_height - obstacle_gap - obstacle_height))"
+        [rotation]="0"
+        ></app-obstacle>
 
       </section>
 

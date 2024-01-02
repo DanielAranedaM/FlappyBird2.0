@@ -1,3 +1,9 @@
-<p>
-  obstacle works!
-</p>
+<!--con el ngstyle le damos propiedades dinamicas-->
+<div class="obstacle" [ngStyle]="{
+  'width': width+'px ',
+  'height': height+'px ',
+  'top': top+'px ',
+  'left': left+'px ',
+  'transform': 'rotate('+ rotation +'deg)'
+}"></div>
+
