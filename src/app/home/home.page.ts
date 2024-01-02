@@ -103,15 +103,15 @@ export class HomePage implements OnInit{
     //**validamos que el juego inicie*/
     if (this.container_width < 400) speed=4;
 
-    if (this.gameStarted){
-      if (this.obstacle_position >= -this.obstacle_width) this.obstacle_position -= speed;
+      if (this.gameStarted && this.obstacle_position >= -this.obstacle_width) this.obstacle_position -= speed;
       //**al salir el obstaculo de la pantalla esto lo reseteara */
       else{
         this.resetObstaclePosition();
         //**si el obstaculo sale de la pantalla y aun no pierde el score aumentara en 1*/
         if (this.gameStarted) this.score++;
       }
-    }
+
+      this.checkCollision()
   }
 
   //**Funcion para resetear la posicion de los obstaculos */
@@ -120,5 +120,33 @@ export class HomePage implements OnInit{
     //**Con esto haremos que el obstaculo tenga una altura aleatoria*/
     this.obstacle_height = Math.floor(Math.random() * (this.container_height - this.obstacle_gap))
   }
+
+  //**Funcion para juego finalizado*/
+  setGameOver(){
+    this.gameStarted = false;
+    this.gameOver = true;
+    this.bird_position = 300;
+  }
+
+  //**Funcion para colicione*/
+  checkCollision(){
+    //**variable para colision superior e inferior*/
+    //**si la posicion del ave es mayor o igual a 0 y menor al obstaculo superior, entonces estara chocando*/
+    let top_obstacle_collision = this.bird_position >= 0 && this.bird_position < this.obstacle_height;
+    //**si la posicion del ave es mayor o igual a toda la resta, existe una colision con el obstaculo inferior */
+    let bottom_obstacle_collision = this.bird_position >= this.container_height - (this.container_height - this.obstacle_gap - this.obstacle_height) - this.bird_height; 
+    //**esta varibale representa la colicion con el suelo*/
+    let floor_collision = (this.bird_position + 40) >= this.container_height;
+    //**si la variable es true se ejecuta el fin del juego*/
+    if (floor_collision) this.setGameOver();
+    //**si la posicion del obstaculo es mayor o igual a la anchura del obst. y si la posicion del obst es menor o igual a la anchura mas 80 signfica que hubo colision*/
+    if (this.obstacle_position >= this.obstacle_width
+      && this.obstacle_position <= this.obstacle_width + 80
+      && (top_obstacle_collision || bottom_obstacle_collision)){
+
+        this.setGameOver()
+      }
+  }
+
 
 }
