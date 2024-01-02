@@ -93,4 +93,27 @@ export class HomePage implements OnInit{
     
   }
 
+  //**Funcion para mover obstaculos */
+  moveObstacle(){
+    //**variable para la velocidad de obstaculo*/
+    let speed: number = 6;
+    //**validamos que el juego inicie*/
+    if (this.container_width < 400) speed=4;
+
+    if (this.gameStarted){
+      if (this.obstacle_position >= -this.obstacle_width) this.obstacle_position -= speed;
+      //**al salir el obstaculo de la pantalla esto lo reseteara */
+      else{
+        this.resetObstaclePosition();
+        //**si el obstaculo sale de la pantalla y aun no pierde el score aumentara en 1*/
+        if (this.gameStarted) this.score++;
+      }
+    }
+  }
+
+  //**Funcion para resetear la posicion de los obstaculos */
+  resetObstaclePosition(){
+
+  }
+
 }
