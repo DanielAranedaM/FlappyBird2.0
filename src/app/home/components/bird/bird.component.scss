@@ -1,0 +1,7 @@
+//**determina la posicion del pajaro*/
+.bird {
+    position: absolute;
+    background: url(/assets/images/bird.gif) no-repeat;
+    transform: rotate(-15deg);
+    left: 100px
+}
